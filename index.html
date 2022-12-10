@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="./p5.js"></script>
 </head>
 <body>
-<script src="./p5.js"></script>
-<script src="./sketch.js"></script>
+<div class="controls">
+    Speed<br/>
+    <input type="range" id="framerate" value="15" min="5" max="50"/><span id="range-value"></span>
+    <br/><button onclick="start()">Restart</button>
+</div>
 </body>
+<script>
+    var frameSelector = document.getElementById('framerate');
+    const frameSelectorLabel = document.getElementById('range-value');
+    frameSelectorLabel.innerText = frameSelector.value;
+    frameSelector.oninput = function (e) {
+        frameSelectorLabel.innerText = e.target.value;
+    }
+</script>
+<script src="./sketch.js"></script>
 </html>

@@ -3,14 +3,14 @@ const current = {
     y: 0,
 };
 const size = 40;
-const stack = [];
-const cells = [];
+let stack = [];
+let cells = [];
 const borderWidth = 2;
 
-function setup() {
-    createCanvas(800, 800);
+function start() {
     angleMode(DEGREES);
-    frameRate(20);
+    frameRate(parseInt(frameSelector.value));
+    cells = [];
     for (let i = 0; i < 800 / size; i++) {
         const ar = [];
         for (let j = 0; j < 800 / size; j++) {
@@ -18,7 +18,15 @@ function setup() {
         }
         cells.push(ar);
     }
+    stack = [];
+    current.x = 0;
+    current.y = 0;
 }
+function setup() {
+    createCanvas(800, 800);
+    start();
+}
+
 
 function rectangle(x, y, borders) {
     x *= size;
@@ -136,7 +144,7 @@ function updateCurrent() {
 }
 
 function getPreviousPosition() {
-    return stack[stack.length - 1];
+    return stack.length ? stack[stack.length - 1] : {};
 }
 
 function isValidDirection(direction) {
